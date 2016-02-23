@@ -1,0 +1,32 @@
+<div class="btn-upload-wrap" ng-show="isEdit.vi.bool">
+    <a href="javascript:;" class="btn btn-primary">文件上传</a>
+    <input type="file" nv-file-select="" uploader="uploader" multiple="">
+</div>
+
+<div nv-file-drop="" uploader="uploader">
+    <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+        <ul class="viBox-wrap">
+            <li ng-repeat="pic in pics" class="viBox editItem">
+                <a class="img-wrap" ng-href="{{ STATIC_URL + pic.path }}" target="_blank">
+                    <img ng-src="{{ pic.thumbnail || STATIC_URL + pic.path }}" class="viImg" title="{{ pic.name }}">
+                </a>
+                <div class="picName">{{ pic.name }}</div>
+                <div class="progress" style="margin-bottom: 0;">
+                    <div class="progress-bar" role="progressbar" style="width: 100%;"></div>
+                </div>
+                <span ng-show="isEdit.vi.bool" class="glyphicon glyphicon-remove" ng-click="delInitPic(pics, $index)"></span>
+            </li>
+            <li ng-repeat="item in uploader.queue" class="viBox editItem">
+                <a class="img-wrap" ng-href="{{ STATIC_URL + item.href }}" target="_blank" ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, width: 120, height: 120 }"></a>
+                <div class="picName">{{ item.file.name }}</div>
+                <div ng-show="uploader.isHTML5">
+                    <div class="progress" style="margin-bottom: 0;">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                    </div>
+                </div>
+                <span ng-show="item.isSuccess || item.isEdit.bool" class="glyphicon glyphicon-remove" ng-click="delPic(item)"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+

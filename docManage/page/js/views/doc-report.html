@@ -1,0 +1,21 @@
+<div class="report-wrap">
+    <form class="form-inline echarts-filter-box">
+        <div class="form-group">
+            <label>分类：</label>
+            <select class="form-control" ng-model="formData.type" ng-options="item.value as item.name for item in typeOptions"></select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">开始日期：</label>
+            <input date-range-picker name="daterange6" class="form-control date-picker" type="text" ng-model="formData.startDate" options="{singleDatePicker: true}" required/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">结束日期：</label>
+            <input date-range-picker name="daterange6" class="form-control date-picker" type="text" ng-model="formData.endDate" options="{singleDatePicker: true}" required/>
+        </div>
+        <a href="javascript:;" class="btn btn-primary btn-search" ng-click="search()">搜索</a>
+    </form>
+</div>
+
+<div class="chart-wrap">
+    <highchart config="chartConfig"></highchart>
+</div>

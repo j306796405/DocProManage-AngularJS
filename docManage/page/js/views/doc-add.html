@@ -1,0 +1,144 @@
+<div class="in-wrapper" style="margin-top:28px;box-shadow:0px 4px 2px #888888;">
+    <img ng-src="{{ STATIC_URL }}/img/new-doc.png" style="float:left; width:56px;">
+    <div style="margin-left:80px;font-size:12px">
+        <h2>新项目文档</h2>
+    </div>
+</div>
+<div class="in-wrapper">
+    <form novalidate name="addForm">
+        <table class="table table-responsive add-table">
+            <tr>
+                <th>业务线类型</th>
+                <td>
+                    <label class="checkbox-inline" data-ng-repeat="tag in initForm.tags">
+                        <input type="checkbox" name="tag.name" ng-click="collectTag($event,tag)">{{ ::tag.name }}
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="color-red">*</span>项目类型/名称</th>
+                <td>
+                    <div class="form-item-box">
+                        <select class="form-control" ng-model="formData.proClass" ng-init="formData.proClass = '变更' " style="width:90px;display: inline-block;">
+                            <option value="变更" selected> 变更
+                            <option value="项目"> 项目
+                            <option value="团队"> 团队
+                        </select>
+                        <input class="form-control" name="proName" ng-model="formData.proName" style="width: 710px; display: inline-block;" required/>
+                        <label class="error errMsg errMsg-active" ng-show="addForm.$dirty && addForm.proName.$invalid">请输入您的项目名称</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>项目简介</th>
+                <td>
+                    <input type="text" class="form-control" ng-model="formData.proDes"/>
+                </td>
+            </tr>
+            <tr>
+                <th>CP4</th>
+                <td>
+                    <!-- <input type="text" class="form-control" ng-model="formData.cp4"/> -->
+                    <div class="textAngular" text-angular ng-model="formData.cp4" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="color-red">*</span>项目成员
+                    <br />
+                    <span class="tips">单选框为经办人</span>
+                </th>
+                <td>
+                    <div id="editPerson" class="form-item-box">
+                        <label>
+                            <i>CSS</i>
+                            <input type="text" class="form-control" list="CSS-datalist" ng-model="person.css.value" ng-init="person.css.group = 'CSS'">
+                            <datalist id="CSS-datalist">
+                                <option value="王卓">
+                                <option value="江毅平">
+                                <option value="郑俊">
+                                <option value="王伟红">
+                                <option value="纪铜雪">
+                                <option value="蒋林捷">
+                                <option value="李志嘉">
+                                <option value="汪兆飞">
+                                <option value="李杰">
+                            </datalist>
+                            <input type="radio" class="c-radio" name="operator" value="true" ng-model="person.css.isOperator" ng-click="changeOperator(person, person.css)"/>
+                        </label>
+                        <label>
+                            <i>VI</i>
+                            <input type="text" class="form-control" list="VI-datalist" ng-model="person.vi.value" ng-init="person.vi.group = 'VI'">
+                            <datalist id="VI-datalist">
+                                <option value="苏伦">
+                                <option value="杨思溢">
+                                <option value="邱志鑫">
+                                <option value="苏忆晨">
+                                <option value="张丹">
+                                <option value="吴慧敏">
+                                <option value="顾帆">
+                                <option value="洪云霓">
+                                <option value="唐静">
+                            </datalist>
+                            <input type="radio" class="c-radio" name="operator" value="true" ng-model="person.vi.isOperator" ng-click="changeOperator(person, person.vi)"/>
+                        </label>
+                        <label>
+                            <i>UI</i>
+                            <input type="text" class="form-control" list="UI-datalist" ng-model="person.ui.value" ng-init="person.ui.group = 'UI'">
+                            <datalist id="UI-datalist">
+                                <option value="吕华">
+                                <option value="李文锦">
+                                <option value="张晶">
+                                <option value="徐承豪">
+                                <option value="朱蝶">
+                                <option value="强晶">
+                                <option value="杜露">
+                                <option value="李雪娇">
+                                <option value="林传毅">
+                            </datalist>
+                            <input type="radio" class="c-radio" name="operator" value="true" ng-model="person.ui.isOperator" ng-click="changeOperator(person, person.ui)"/>
+                        </label>
+                        <label>
+                            <i>PM</i>
+                            <input type="text" class="form-control" ng-model="person.pm.value" ng-init="person.pm.group = 'PM'">
+                            <input type="radio" class="c-radio" name="operator" value="true" ng-model="person.pm.isOperator" ng-click="changeOperator(person, person.pm)"/>
+                        </label>
+                    </div>
+                    <label class="error errMsg errMsg-active" ng-show="addForm.$dirty && addForm.operator.$invalid">请勾选并输入至少一名经办人</label>
+                </td>
+            </tr>
+            <tr>
+                <th>前端Hifi原型</th>
+                <td>
+                    <!-- <div contenteditable-directive="true" ng-model="formData.cssLink"></div> -->
+                    <div class="textAngular" text-angular ng-model="formData.cssLink" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>仓库分支</th>
+                <td data-branches-directive editable="true" ng-controller="BranchesController"></td>
+            </tr>
+            <tr>
+                <th>图片发布地址</th>
+                <td>
+                    <!-- <div contenteditable-directive="true" ng-model="formData.picsLink"></div> -->
+                    <div class="textAngular" text-angular ng-model="formData.picsLink" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>LowFi</th>
+                <td>
+                    <!-- <div contenteditable-directive="true" ng-model="formData.lowfiLink"></div> -->
+                    <div class="textAngular" text-angular ng-model="formData.lowfiLink" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>VI</th>
+                <td ui-view="upload"></td>
+            </tr>
+        </table>
+        <div id="isConfirmBtns">
+            <input type="submit" class="btn btn-primary" value="确定" ng-click="addDoc()">&emsp;&emsp;
+            <a href="#list" class="btn btn-default">取消</a>
+        </div>
+    </form>
+</div>

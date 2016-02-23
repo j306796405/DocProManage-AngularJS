@@ -1,0 +1,15 @@
+主要
+经办人 名字和checkbox 同时有数据
+未编辑的情况下可以上传图片
+转换doc下link,css,pic为安全对象 运用arguments
+编辑插件没有做
+详情页增加datalist
+仓库分支 不安全编码可能需要手动调整
+
+次要
+图片删除后没有按保存 重载详情页后图片链接会不存在
+autofocus
+filter性能优化
+contenteditableDirective.js
+上传中取消会怎样
+上传的图片显示是正方形 可以研究下canvas

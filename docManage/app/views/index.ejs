@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="<%= static_path %>/img/logo.png" type="image/x-icon" />
+    <title>酒店UED项目文档管理</title>
+    <!-- build:css style/combin.min.css -->
+    <link rel="stylesheet" type="text/css" href="<%= static_path %>/style/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="<%= static_path %>/style/daterangepicker.css" />
+
+    <link rel="stylesheet" type="text/css" href="<%= static_path %>/style/ui-select.css" />
+
+    <link rel="stylesheet" type="text/css" href="<%= static_path %>/style/main.css" />
+    <!-- endbuild -->
+</head>
+<body>
+    <div class="base_hd" ui-view="header"></div>
+    <div class="wrapper" ui-view="main-container"></div>
+
+    <script src="<%= static_path %>/lib/jquery-2.1.4.min.js"></script>
+    <script src="<%= static_path %>/lib/angular/angular.min.js"></script>
+    <script src="<%= static_path %>/lib/angular/angular-sanitize.min.js"></script>
+    <script src="<%= static_path %>/lib/angular/angular-ui-router.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/paging.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/angular-file-upload.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/highstock.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/highcharts-ng.min.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/daterangepicker/angular-messages.min.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/daterangepicker/bootstrap.min.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/daterangepicker/moment.min.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/daterangepicker/angular-daterangepicker.min.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/textAngular/textAngular-rangy.min.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/textAngular/textAngular-sanitize.min.js"></script>
+    <script src="<%= static_path %>/lib/angular-plugins/textAngular/textAngular.min.js"></script>
+
+    <script src="<%= static_path %>/lib/angular-plugins/uiSelect/select.min.js"></script>
+
+    <!-- build:js js/combin.min.js -->
+
+    <script src="<%= static_path %>/js/app.js"></script>
+    <script src="<%= static_path %>/js/controllers/HeaderController.js"></script>
+    <script src="<%= static_path %>/js/controllers/DocListController.js"></script>
+    <script src="<%= static_path %>/js/controllers/DocAddController.js"></script>
+    <script src="<%= static_path %>/js/controllers/UploadController.js"></script>
+    <script src="<%= static_path %>/js/controllers/DocDetailController.js"></script>
+    <script src="<%= static_path %>/js/controllers/DocReportController.js"></script>
+
+    <script src="<%= static_path %>/js/controllers/BranchesController.js"></script>
+
+    <script src="<%= static_path %>/js/services/DocListService.js"></script>
+    <script src="<%= static_path %>/js/services/DocAddService.js"></script>
+
+    <script src="<%= static_path %>/js/services/DocBranchesService.js"></script>
+    <script src="<%= static_path %>/js/services/DocReleaseService.js"></script>
+
+    <script src="<%= static_path %>/js/services/UploadService.js"></script>
+    <script src="<%= static_path %>/js/services/DocDetailService.js"></script>
+    <script src="<%= static_path %>/js/services/UploadThumbnailService.js"></script>
+    <script src="<%= static_path %>/js/services/DocReportService.js"></script>
+    <script src="<%= static_path %>/js/services/DocLoginService.js"></script>
+    <script src="<%= static_path %>/js/services/DocUtils.js"></script>
+    <script src="<%= static_path %>/js/directives/docSearchListDirective.js"></script>
+    <script src="<%= static_path %>/js/directives/contenteditableDirective.js"></script>
+    <script src="<%= static_path %>/js/directives/uploadDirective.js"></script>
+    <script src="<%= static_path %>/js/directives/autoFocusDirective.js"></script>
+
+    <script src="<%= static_path %>/js/directives/branchesDirective.js"></script>
+
+    <script src="<%= static_path %>/js/filter/PsdThumbnailFilter.js"></script>
+    <script src="<%= static_path %>/js/filter/TrustHtmlFilter.js"></script>
+    <script src="<%= static_path %>/js/filter/ContainersFilter.js"></script>
+
+    <script src="<%= static_path %>/js/config.js"></script>
+    <!-- endbuild -->
+    <script>
+        myApp.run(['$rootScope', function ($rootScope){
+            //登录初始化
+            $rootScope.user = {
+                name: '<%= user.name %>',
+                mailGroup: '<%= user.mailGroup %>'
+            };
+        }])
+    </script>
+</body>
+
+</html>

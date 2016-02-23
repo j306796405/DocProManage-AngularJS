@@ -1,0 +1,11 @@
+{
+	"name":"docManage",
+	"script":"./app/index.js",
+	"error_file":"/var/www/hotel.ued.apps/app_logs/proManage_log/pm2-error.log",
+	"out_file":"/var/www/hotel.ued.apps/app_logs/proManage_log/pm2-out.log",
+	"pid_file":"/var/www/hotel.ued.apps/app_logs/proManage_log/pm2-docManage.pid",
+	"merge_logs":true,
+	"env": {
+	    "NODE_ENV": "production"
+	  }
+}

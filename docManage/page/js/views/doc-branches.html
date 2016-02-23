@@ -1,0 +1,19 @@
+<div class="content link" ng-if="!doc.git && doc.repository" auto-focus-directive>{{ doc.repository }}</div>
+<div class="content" ng-if="!doc.repository">
+    <label class="checkbox-inline" ng-repeat="(alias, repository) in gitData.repositories">
+        <input type="checkbox" ng-disabled="!isEdit.git.bool && !editable" name="{{alias}}" ng-checked="repositoryIsSelected(repository.id)" ng-click="collectRepository($event, alias, repository.id)">{{::alias}}
+    </label>
+</div>
+<div class="content" ng-show="gitData.repositoriesSelected.length">
+    <div class="selectBranch" ng-repeat="item in gitData.repositoriesSelected">
+        <ui-select ng-disabled="!isEdit.git.bool && !editable" ng-model="gitData.branch[item].selected">
+            <ui-select-match placeholder="Select or search a branch in the list...">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="branch in gitData.branches[item].branch | filter: $select.search">
+                <span ng-bind-html="branch.name | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
+        <i>&lt; repository: {{::item}} &gt;</i>
+        <span class="btn btn-primary" ng-disabled="!isEdit.git.bool && !editable || !gitData.branch[item].selected" ng-if="!gitData.branch[item].selected.publish" ng-click="releaseData(item)">发布</span>
+        <span class="btn btn-primary" ng-disabled="true" ng-if="gitData.branch[item].selected.publish">已发布</span>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="wrapper">
+    <div class="in-wrapper" style="margin-top:28px;box-shadow:0px 4px 2px #888888;">
+        <div class="btn-group">
+            <a href="javascript:;" class="edit btn btn-default" ng-click="modify('proName', $event)">Edit</a>
+            <a href="javascript:;" class="save btn btn-default" ng-click="saveNameAndFlag('proName')">Save</a>
+        </div>
+        <img ng-src="{{ doc.proClassLogo }}" title="{{ doc.proClass }}" class="hImg">
+        <div class="detail-header">
+            <h2 ng-if="!isEdit.proName.bool" class="pro-name">{{ doc.proName }}</h2>
+            <input type="text" class="form-control pro-name-input" ng-model="doc.proName" ng-if="isEdit.proName.bool" autofocus-directive/>
+            <div class="tags-wrap">
+                <span class="label tag" ng-if="!isEdit.proName.bool" ng-class="{ 'tag-green': tag == 'Online', 'tag-blue': tag == 'Offline', 'tag-pink': tag == 'Mobile', 'tag-yellow': tag == '物料' }" ng-repeat="tag in doc.tag">{{ tag }}</span>
+            </div>
+            <div class="tags-edit-wrap" ng-if="isEdit.proName.bool">
+                <label class="checkbox-inline" ng-repeat="tag in initForm.tags">
+                    <input type="checkbox" ng-checked="tag.isSelected" ng-init="tag.isSelected = (doc.tag | ContainersFilter : tag.name)" ng-click="collectTag($event, tag)"> {{ tag.name }}
+                </label>
+            </div>
+            &emsp;&emsp;
+            <span class="fs12">更新于：{{ doc.createDate }}</span>
+        </div>
+    </div>
+    <div class="in-wrapper">
+        <div class="itemInfo">
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="javascript:;" class="edit btn btn-default" ng-click="modify('proDes', $event)">Edit</a>
+                    <a href="javascript:;" class="save btn btn-default" ng-click="commonSave('proDes')">Save</a>
+                </div>
+                <h3>项目简介</h3>
+            </div>
+            <div class="content" ng-if="!isEdit.proDes.bool">{{ doc.proDes }}</div>
+            <input type="text" class="form-control" ng-model="doc.proDes" ng-if="isEdit.proDes.bool" autofocus-directive/>
+        </div>
+        <div class="itemInfo">
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="javascript:;" class="edit btn btn-default" ng-click="modify('cp4', $event)">Edit</a>
+                    <a href="javascript:;" class="save btn btn-default" ng-click="commonSave('cp4')">Save</a>
+                </div>
+                <h3>CP4</h3>
+            </div>
+            <div class="content" ng-if="!isEdit.cp4.bool" ng-bind-html="doc.cp4"></div>
+            <div class="textAngular" text-angular ng-model="doc.cp4" ng-if="isEdit.cp4.bool" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+            <!-- <input type="text" class="form-control" ng-model="doc.cp4" ng-if="isEdit.cp4.bool" autofocus-directive/> -->
+        </div>
+        <div class="itemInfo">
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="javascript:;" class="edit btn btn-default" ng-click="modify('person', $event)">Edit</a>
+                    <a href="javascript:;" class="save btn btn-default" ng-click="commonSave('person')">Save</a>
+                </div>
+                <h3>项目成员 <span class="tips">(单选框为经办人)</span></h3>
+            </div>
+            <div class="content">
+                <ul class="person">
+                    <li ng-repeat="person in doc.person">
+                        <i class="field">{{ person.group }}：</i>
+                        <span class="field-value" ng-if="!isEdit.person.bool">{{ person.value }}</span>
+                        <input type="text" class="form-control" ng-model="person.value" ng-if="isEdit.person.bool"/>
+                        <input type="radio" class="c-radio" name="operator" ng-checked="person.isOperator" ng-disabled="!isEdit.person.bool"  ng-click="changeOperator(doc.person, person.group)"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="itemInfo">
+            <h3>前端Hifi原型</h3>
+            <div class="subItemInfo">
+                <div class="clearfix">
+                    <div class="btn-group">
+                        <a href="javascript:;" class="edit btn btn-default" ng-click="modify('cssLink')">Edit</a>
+                        <a href="javascript:;" class="save btn btn-default" ng-click="commonSave('cssLink')">Save</a>
+                    </div>
+                    <h4>原型地址</h4>
+                </div>
+                <div class="content" ng-if="!isEdit.cssLink.bool" ng-bind-html="doc.cssLink"></div>
+                <div class="textAngular" text-angular ng-model="doc.cssLink" ng-if="isEdit.cssLink.bool" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                <!-- <div class="content" ng-model="doc.cssLink" contenteditable-directive="isEdit.cssLink.bool"></div> -->
+            </div>
+            <div class="subItemInfo">
+                <div class="clearfix">
+                    <div class="btn-group" ng-if="doc.git || !doc.repository">
+                        <a href="javascript:;" class="edit btn btn-default" ng-click="modify('git', $event)">Edit</a>
+                        <a href="javascript:;" class="save btn btn-default" ng-click="repositorySave('git')">Save</a>
+                    </div>
+                    <h4>仓库分支</h4>
+                </div>
+                <div data-branches-directive editable="false" ng-controller="BranchesController"></div>
+            </div>
+            <div class="subItemInfo">
+                <div class="clearfix">
+                    <div class="btn-group">
+                        <a href="javascript:;" class="edit btn btn-default" ng-click="modify('picsLink')">Edit</a>
+                        <a href="javascript:;" class="save btn btn-default" ng-click="commonSave('picsLink')">Save</a>
+                    </div>
+                    <h4>图片发布地址</h4>
+                </div>
+                <div class="content" ng-if="!isEdit.picsLink.bool" ng-bind-html="doc.picsLink"></div>
+                <div class="textAngular" text-angular ng-model="doc.picsLink" ng-if="isEdit.picsLink.bool" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                <!-- <div class="content" ng-model="doc.picsLink" contenteditable-directive="isEdit.picsLink.bool"></div> -->
+            </div>
+        </div>
+        <div class="itemInfo">
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="javascript:;" class="edit btn btn-default" ng-click="modify('lowfiLink')">Edit</a>
+                    <a href="javascript:;" class="save btn btn-default" ng-click="commonSave('lowfiLink')">Save</a>
+                </div>
+                <h3>LowFi</h3>
+            </div>
+            <div class="subItemInfo">
+                <div class="content" ng-if="!isEdit.lowfiLink.bool" ng-bind-html="doc.lowfiLink"></div>
+                <div class="textAngular" text-angular ng-model="doc.lowfiLink" ng-if="isEdit.lowfiLink.bool" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                <!-- <div class="content" ng-model="doc.lowfiLink" contenteditable-directive="isEdit.lowfiLink.bool"></div> -->
+            </div>
+        </div>
+        <div class="itemInfo">
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="javascript:;" class="editVI btn btn-default" ng-click="modify('vi')">Edit</a>
+                    <a href="javascript:;" class="saveVI btn btn-default" ng-click="saveVi('vi')">Save</a>
+                </div>
+                <h3>VI</h3>
+            </div>
+            <div ui-view="upload"></div>
+        </div>
+    </div>
+</div>
