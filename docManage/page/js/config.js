@@ -3,7 +3,7 @@
 //myApp.constant('STATIC_URL', '/docmapp/');
 
 //home
-//myApp.constant('FAKE_URL', '');
+myApp.constant('FAKE_URL', '');
 
 //dev
 //myApp.constant('FAKE_URL', '/docmapp_beta/');
